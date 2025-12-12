@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace AuthApp.core.Dto
 {
-    public class UserDto
+    public class UserLoginDto
     {
-        public string UserName { get; set; } = string.Empty;
+        public string UserNameOrEmail { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
     }
 }
