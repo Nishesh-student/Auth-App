@@ -1,7 +1,13 @@
+using AuthApp.application.Abstraction;
+using AuthApp.application.Mapper;
+using AuthApp.application.Services;
+using AuthApp.core.Abstraction.Repositories;
 using AuthApp.infrastructure.Data;
+using AuthApp.infrastructure.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using System.Reflection;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,7 +19,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-
+builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(UserProfile)));
+builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 builder.Services.AddDbContext<UserContext>(option =>
 option.UseSqlServer(builder.Configuration.GetConnectionString("conn")));
