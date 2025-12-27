@@ -1,5 +1,6 @@
 ﻿using AuthApp.api.Models;
 using AuthApp.core.Dto;
+using AuthApp.core.Models;
 using AutoMapper;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ namespace AuthApp.application.Mapper
         public UserProfile()
         {
             CreateMap<UserRegisterModel, UserRegisterDto>();
+            CreateMap<UserLoginModel, UserLoginDto>();
         }
     }
 }

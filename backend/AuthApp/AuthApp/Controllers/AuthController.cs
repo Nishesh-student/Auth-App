@@ -1,6 +1,7 @@
 ﻿using AuthApp.api.Models;
 using AuthApp.application.Abstraction;
 using AuthApp.core.Dto;
+using AuthApp.core.Models;
 using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -28,7 +29,24 @@ namespace AuthApp.api.Controllers
 
             if (result == null)
             {
-                return BadRequest("User Already Exists");
+                return BadRequest("User with same email already exists.");
+            }
+            return Ok(result);
+        }
+        [HttpPost("login")]
+        public async Task<IActionResult> Login(UserLoginModel model)
+        {
+            var user = _mapper.Map<UserLoginDto>(model);
+            var result = await _authService.LoginAsync(user);
+
+            if (result is null)
+            {
+                return BadRequest("Invalid UserName or Password");
+            }
+
+            if (result == "User Not Found")
+            {
+                return BadRequest("User Not Found");
             }
             return Ok(result);
         }

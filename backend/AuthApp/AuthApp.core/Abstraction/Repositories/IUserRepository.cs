@@ -10,7 +10,8 @@ namespace AuthApp.core.Abstraction.Repositories
 {
     public interface IUserRepository
     {
-        Task<bool> IsExistAsync(string Username);
+        Task<bool> IsExistAsync(string email);
         Task<bool> RegisterAsync(User user);
+        Task<User?> FindAsync(UserLoginDto request); 
     }
 }
