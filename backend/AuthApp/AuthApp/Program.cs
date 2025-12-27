@@ -1,3 +1,4 @@
+using AuthApp.api;
 using AuthApp.application.Abstraction;
 using AuthApp.application.Mapper;
 using AuthApp.application.Services;
@@ -20,8 +21,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(UserProfile)));
-builder.Services.AddScoped<IAuthService, AuthService>();
-builder.Services.AddScoped<IUserRepository, UserRepository>();
+
+builder.Services.ConfigureRepositories();
+builder.Services.ConfigureServices();
 
 builder.Services.AddDbContext<UserContext>(option =>
 option.UseSqlServer(builder.Configuration.GetConnectionString("conn")));
